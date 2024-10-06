@@ -1,0 +1,19 @@
+FROM node:20.11.0-alpine
+LABEL maintainer 'Arturo Mendoza <arturo.amb89@gmail.com>'
+RUN addgroup -S hackerrank
+RUN adduser -D -S -g hackerrank hackerrank
+RUN mkdir -p /app /home/hackerrank/Downloads
+RUN chown -R hackerrank:hackerrank /home/hackerrank /app
+RUN apk add --no-cache sudo nano dumb-init curl
+HEALTHCHECK --interval=5m --timeout=3s CMD curl -f http://localhost/ || exit 1
+WORKDIR /app
+USER hackerrank
+ENV NODE_ENV=${NODE_ENV}
+ENV NPM_CONFIG_PREFIX=/home/hackerrank/.npm-global
+ENV PATH=$PATH:/home/hackerrank/.npm-global/bin
+COPY --chown=hackerrank:hackerrank package*.json ./
+RUN npm run install-build:production
+COPY --chown=hackerrank:hackerrank . .
+USER root
+RUN chmod -R 775 /app
+USER hackerrank
