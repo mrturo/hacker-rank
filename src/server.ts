@@ -4,6 +4,7 @@ import { PlusMinus as PlusMinusController } from './application/controller/plusM
 import { SimpleArraySum as SimpleArraySumController } from './application/controller/simpleArraySum.controller';
 import { CompareTheTriplets as CompareTheTripletsController } from './application/controller/compareTheTriplets.controller';
 import { QueensAttack2 as QueensAttack2Controller } from './application/controller/queensAttack2.controller';
+import { MagicSquareForming as MagicSquareFormingController } from './application/controller/magicSquareForming.controller';
 export class Server {
   public static init(): App {
     return new App([
@@ -11,7 +12,8 @@ export class Server {
       new PlusMinusController(),
       new SimpleArraySumController(),
       new CompareTheTripletsController(),
-      new QueensAttack2Controller()
+      new QueensAttack2Controller(),
+      new MagicSquareFormingController()
     ]);
   }
 }
