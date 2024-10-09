@@ -1,6 +1,5 @@
 import * as dotenv from 'dotenv';
 import { Configuration as ConfigurationUtil } from './configuration.util';
-import { Logger as LoggerUtil } from './logger.util';
 export class Environment {
   public static init(): Environment {
     let nodeEnv = '';
@@ -8,7 +7,7 @@ export class Environment {
       nodeEnv = ConfigurationUtil.nodeEnv();
     } catch (error) {
       if (error && error instanceof Error) {
-        LoggerUtil.warn(error.message);
+        console.warn(error.message);
       }
     }
     const amb: Environment = new Environment(nodeEnv);
